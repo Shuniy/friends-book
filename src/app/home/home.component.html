@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 my-3">
+      <app-card-profile></app-card-profile>
+    </div>
+    <div class="col-lg-9 my-3">
+      <div *ngIf="!viewingUser.isActive">This user is blocked!</div>
+      <div *ngIf="viewingUser.isActive">
+        <div *ngIf="viewUserId == ''">
+          <!-- Post Content -->
+          <div class="row" *ngIf="!currentUser.isAdmin">
+            <div class="card">
+              <div class="card-header bg-primary" style="color: white">
+                Create Post
+              </div>
+              <div class="card-body">
+                <div>
+                  <input
+                    class="form-control"
+                    id="postText"
+                    width="100vw"
+                    placeholder="Enter Post Text Here!"
+                    [(ngModel)]="postText"
+                  />
+                </div>
+                <div class="my-3" *ngIf="!uploadingPostPicture">
+                  <button class="btn btn-primary" (click)="selectPostPicture()">
+                    Upload Picture
+                  </button>
+                </div>
+                <div class="my-3" *ngIf="uploadingPostPicture">
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    (change)="postPictureChanged($event)"
+                  />
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="submitPost()">
+                    Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Create Post With Admin -->
+          <div class="row" *ngIf="currentUser.isAdmin">
+            <div class="card">
+              <div class="card-header bg-primary" style="color: white">
+                <p>Add Post</p>
+              </div>
+              <div class="card-body">
+                <div>
+                  <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="postText"
+                  />
+                </div>
+                <div>
+                  <div *ngIf="!uploadingPostPicture">
+                    <button
+                      class="btn btn-primary"
+                      (click)="selectPostPicture()"
+                    >
+                      Upload Picture
+                    </button>
+                  </div>
+                  <div *ngIf="uploadingPostPicture">
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      (change)="postPictureChanged($event)"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="submitPost()">
+                    Post
+                  </button>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="postAd()">
+                    Post Ad
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- All Posts -->
+
+        <div class="row my-3">
+          <div class="card">
+            <div class="card-header bg-primary" style="color: white">
+              All Posts
+            </div>
+            <div class="card-body">
+              <div *ngIf="postsList.length == 0">No Posts</div>
+              <div *ngFor="let post of postsList">
+                <div class="card">
+                  <div class="card-title bg-primary p-2" style="color: white">
+                    From : {{ post.userName }}
+                  </div>
+                  <div class="card-body">
+                    <div *ngIf="post.isActive == true">
+                      <div class="row">
+                        <div class="col-3">
+                          <img
+                            [src]="post.userPhotoUrl"
+                            class="img-fluid"
+                            style="
+                              border-radius: 50px;
+                              width: 100px;
+                              border: 1px solid;
+                            "
+                            alt="No Picture!"
+                          />
+                        </div>
+                        <div class="col-9">
+                          {{ post.post }}
+                        </div>
+                        <div
+                          *ngIf="post.postImageUrl != null"
+                          class="row my-3 align-self-center"
+                        >
+                          <img [src]="post.postImageUrl" class="img-fluid" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      *ngIf="post.isActive == false"
+                      class="text-center my-3"
+                    >
+                      (hidden) Post Sorry!
+                    </div>
+
+                    <div
+                      *ngIf="currentUser.isAdmin || viewUserId == ''"
+                      class="my-3"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="hideUnhidePost(post)"
+                      >
+                        {{ post.isActive == true ? "Hide" : "Unhide" }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

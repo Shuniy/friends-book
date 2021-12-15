@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 my-3">
+      <app-card-profile></app-card-profile>
+    </div>
+
+    <div class="col-lg-9 my-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-header bg-primary" style="color: white">
+            <p>Your Friends!</p>
+          </div>
+          <div class="card-body">
+            <div *ngIf="!friendsList.length" class="text-center">
+              <p>No Friends Yet!</p>
+            </div>
+            <div *ngIf="friendsList.length">
+              <div *ngFor="let friend of friendsList">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row justify-content-center">
+                      <div class="col align-self-center">
+                        <img
+                          class="rounded-circle z-depth-2 mw-100 mh-100"
+                          (click)="onImageClick(friend)"
+                          width="150"
+                          height="150"
+                          alt="No Picture!"
+                          [src]="friend.photoUrl"
+                          data-holder-rendered="true"
+                        />
+                      </div>
+                      <div class="col align-self-center">
+                        {{ friend.fullName }}
+                      </div>
+                      <div class="col align-self-center"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

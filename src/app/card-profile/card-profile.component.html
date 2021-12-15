@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title text-center">
+      <h4>{{ viewingUser.firstName }} {{ viewingUser.lastName }}</h4>
+    </div>
+    <div class="card-body">
+      <div class="container text-center my-3">
+        <img
+          class="img-thumbnail"
+          [src]="userPhoto"
+          width="200"
+          height="200"
+          id="image"
+          alt="Profile Picture"
+        />
+        <label for="image"></label>
+      </div>
+      <div class="container my-3 text-center">
+        <label for="changePicture" class="btn btn-primary">
+          Change Picture
+          <input
+            id="changePicture"
+            type="file"
+            class="file-input"
+            (change)="uploadProfilePicture($event)"
+            hidden
+          />
+        </label>
+      </div>
+
+      <div class="container my-3 text-center">
+        <div *ngIf="viewingUser.isActive">
+          <b>{{ friendsCount }} Friends</b>
+        </div>
+        <div *ngIf="viewingUser.isActive">
+          <b>{{ postsCount }} Posts</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

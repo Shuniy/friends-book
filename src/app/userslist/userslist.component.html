@@ -1,0 +1,59 @@
+<div class="container">
+  <div *ngIf="currentUser.isAdmin == false">
+    <div class="row justify-content-center">
+      <div class="text-center align-self-center">
+        <div class="container">Permission Denied!</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="currentUser.isAdmin" class="row">
+    <div class="col-lg-3 my-3">
+      <app-card-profile></app-card-profile>
+    </div>
+
+    <div class="col-lg-9 my-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-header bg-primary" style="color: white">
+            <p>Users List</p>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let user of usersList">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row justify-content-center">
+                    <div class="col align-self-center">
+                      <img
+                        class="rounded-circle z-depth-2 mw-100 mh-100"
+                        (click)="onImageClick(user)"
+                        width="150"
+                        height="150"
+                        alt="No Picture!"
+                        [src]="user.photoUrl"
+                        data-holder-rendered="true"
+                      />
+                    </div>
+                    <div class="col align-self-center">
+                      {{ user.firstName }} {{ user.lastName }}
+                    </div>
+                    <div class="col align-self-center">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="blockUnblockUser(user)"
+                      >
+                        {{
+                          user.isActive == true ? "Block User" : "Unblock User"
+                        }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

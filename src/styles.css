@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.btn-primary {
+    background-color: #0c4f80e8;
+
+}
+
+.rounded-circle z-depth-2 mw-100 mh-100{
+    width: 50;
+    height: 50;
+}

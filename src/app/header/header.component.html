@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home"
+      ><i class="fas fa-user-friends"></i> {{ title }}</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="currentUser" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            aria-current="page"
+            routerLink="/home"
+            >Home</a
+          >
+        </li>
+        <li *ngIf="currentUser?.isAdmin">
+          <a
+            class="nav-item nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/userslist"
+            >UserList</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/network"
+            >Network</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/friends"
+            >Friends</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/settings"
+            >Settings</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/login"
+            (click)="logout()"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!currentUser" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            aria-current="page"
+            routerLink="/register"
+            >Register</a
+          >
+        </li>
+        <li *ngIf="currentUser?.isAdmin">
+          <a
+            class="nav-item nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/userslist"
+            >UserList</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLinkActive]="['active']"
+            routerLink="/login"
+            >Login</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
